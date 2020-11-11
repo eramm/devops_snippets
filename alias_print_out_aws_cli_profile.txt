@@ -1,0 +1,3 @@
+use the aws cli to setup multiple named profiles. Add this to your bash_alias file 
+alias awsenv="grep profile ~/.aws/config | sed -ne 's/^\[profile\s\(.*\)\]/export AWS_PROFILE=\1/p'"
+copy and paste the env you want to work with and test with `aws s3 ls`
