@@ -1,0 +1,14 @@
+based on
+https://stackoverflow.com/questions/64863727/aws-cli-query-multiple-attributes-when-these-attributes-are-on-the-same-level
+
+It gives:
+
+[
+  {
+    "InstanceId": "i-12345678",
+    "GroupNames": [
+      "sg-number1",
+      "sg-number_2"
+    ]
+  }
+]
