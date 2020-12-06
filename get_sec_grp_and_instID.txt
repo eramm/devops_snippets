@@ -1,0 +1,1 @@
+this queries the SG and returns the instance ID only
