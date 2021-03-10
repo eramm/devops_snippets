@@ -11,12 +11,12 @@ while read -r line; do
 
   if [ -n "$u" ]; then
     u=$(echo "$u" | tr '[:upper:]' '[:lower:]')
-    # [ -n "$u" ] && echo "$line" >$u.txt
+
     if getent passwd $u; then
       echo user $u exists
     else
       echo "Adding user $u"
-
+      [ -n "$u" ] && echo "$line" >$u.txt
       useradd -m $u -p '*'
 
       #     sudo rm -f /home/$u/.bash*
