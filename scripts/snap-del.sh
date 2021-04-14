@@ -22,7 +22,8 @@ filename="$1"
 # sggroup="$2"
 while read -r line; do
 
-  echo "IP is  - $line"
-dig +noall +answer -x $line
-aws ec2 describe-addresses --public-ips $line
+  echo "Snapshot ID  read from file - $line"
+
+  aws ec2 delete-snapshot --snapshot-id $line
+
 done < "$filename"
