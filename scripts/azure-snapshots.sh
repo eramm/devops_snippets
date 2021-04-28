@@ -16,17 +16,14 @@ while read -r azvm; do
 
     if [[ $osdisk =~ ^\/[a-z].* ]]; then
         az snapshot create -g "$drg" -n "$azvm.OSdisk" --source "$osdisk"
-        else
-            echo "$azvm" has no OS disk
-    fi 
-
-
-
-     if [[ $extdisk =~ ^\/[a-z].* ]]; then
-        az snapshot create -g "$drg" -n "$azvm.OSdisk" --source "$extdisk"
-        else
-            echo
+    else
+        echo "$azvm" has no OS disk
     fi
-done
+
+    if [[ $extdisk =~ ^\/[a-z].* ]]; then
+        az snapshot create -g "$drg" -n "$azvm.extDisk" --source "$extdisk"
+    else
+        echo "$azvm has no extDisk"
+    fi
 
 done <"$filename"
