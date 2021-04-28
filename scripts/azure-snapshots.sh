@@ -8,7 +8,9 @@ while read -r azvm; do
     echo "VM name read from file - $azvm"
 
     osdisk=$(az vm show -d -g "$srg" -n "$azvm" --query "storageProfile.osDisk.managedDisk.id")
-    extdisk=$(az vm show -d -g "$srg" -n "$azvm" --query "storageProfile.osDisk.managedDisk.id")
+    extdisk=$(az vm show -d -g "$srg" -n "$azvm" --query "storageProfile.dataDisks[].managedDisk.id")
+    osdisk=$(echo "$osdisk" | sed "s/\"//g")
+    extdisk=$(echo "$extdisk" | sed "s/\"//g" && echo "$extdisk" | sed 's/\(\[\|\]\)//g')
     echo "OS disk is $osdisk"
     echo "ext Disk is $extdisk"
 
@@ -17,7 +19,7 @@ while read -r azvm; do
     if [[ $osdisk =~ ^\/[a-z].* ]]; then
         az snapshot create -g "$drg" -n "$azvm.OSdisk" --source "$osdisk"
     else
-        echo "$azvm" has no OS disk
+        echo "$azvm has no OS disk"
     fi
 
     if [[ $extdisk =~ ^\/[a-z].* ]]; then
