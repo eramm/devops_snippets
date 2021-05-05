@@ -24,6 +24,6 @@ while read -r line; do
 
   echo "Volume read from file - $line"
 
-  VOLS=$( aws ec2 describe-volumes --volume-ids $line --query 'Volumes[*].Attachments[*].[InstanceId,State,VolumeId]' --output=text)
-  [[ -z "$VOLS" ]] && echo "$line is not attached">> attached.txt || echo "$line is attached" >> vvv
+    aws ec2 delete-volume --volume-id $line --region us-west-2
+
 done < "$filename"
