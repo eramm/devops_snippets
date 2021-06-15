@@ -24,6 +24,6 @@ while read -r line; do
 
   echo "Volume read from file - $line"
 
-    aws ec2 delete-volume --volume-id $line --region us-west-2
+    aws ec2 delete-volume --volume-id $line
 
 done < "$filename"
